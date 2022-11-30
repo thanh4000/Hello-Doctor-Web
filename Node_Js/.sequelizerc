@@ -1,0 +1,18 @@
+const path = require('path');
+module.exports = {
+  'config': path.resolve('./src/config', 'config.json'),
+  'migrations-path': path.resolve('./src', 'migrations'),
+  'models-path': path.resolve('./src', 'models'),
+  'seeders-path': path.resolve('./src', 'seeders')
+}
+
+/*
+những link ni giúp sequelize-cli biết
+nơi để cấu hình
+config: làm soa để kết nối đc vs database
+migrations-path: tạo bảng trong data base
+models-path: 
+seeders-path: tạo dữ liệu fake
+
+chay duoc r thi no se tu dong tao 3 thu muc
+*/

@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import * as actions from "../store/actions";
+import * as actions from "../../store/actions";
+
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 
-import adminService from "../services/adminService";
+import { handleLoginApi } from "../../services/userService";
+
 import { divide } from "lodash";
+
 
 class Login extends Component {
   //khai báo các state trong này
@@ -16,7 +19,8 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      isShowPassword: false
+      isShowPassword: false,
+      errorMessage: ""
     };
   }
 
@@ -34,7 +38,7 @@ class Login extends Component {
     console.log(even.target.value);
   };
 
-  handleLogin = () => {
+  handleLogin = async () => {
     console.log(
       "username: ",
       this.state.username,
@@ -42,6 +46,36 @@ class Login extends Component {
       this.state.password
     );
     console.log("allState: ", this.state);
+   
+    this.setState({
+      errorMessage: "",
+    }); 
+
+    try {
+      let data = await handleLoginApi(this.state.username, this.state.password);
+      console.log("data: ", data);
+      if(data && data.errCode != 0) 
+      {
+        this.setState({
+          errorMessage: data.message,
+        });
+      }
+      else if(data && data.errCode === 0) 
+      {
+        this.props.userLoginSuccess(data.user);
+
+        console.log("Login success!!!");
+      }
+    } catch(err) {
+      //err.response là 1 object
+      console.log("error: ", err.response.data.message);
+      if(err.response.data)
+      {
+        this.setState({
+          errorMessage: err.response.data.message,
+        });
+      }
+    }
   };
 
   handleShowHiddenPassword = () => {
@@ -59,7 +93,7 @@ class Login extends Component {
           <div className="login-content row">
             <div className="col-12 text-center text-login">Login</div>
             <div className="col-12 form-group login-input">
-              <label>UserName:</label>
+              <label>UserName</label>
               <input
                 type="text"
                 className="form-control"
@@ -92,6 +126,10 @@ class Login extends Component {
                 </span>
 
               </div>
+            </div>
+
+            <div style={{color: "red"}}>
+              <span>{this.state.errorMessage}</span>
             </div>
 
             <div className="col-12">
@@ -135,9 +173,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+    
+    // userLoginFail: () => dispatch(actions.userLoginFail()),
+  
+    userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 

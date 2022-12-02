@@ -33,7 +33,9 @@ let handleLogin = async (req, res) => {
     return res.status(200).json({
         errCode: userData.errCode,
         message: userData.errMessage,
-        userData
+        //nếu trường hợp có biến userData thì trả về
+        //nếu không thì trả về {}
+        user: userData.user ? userData.user : {}
     })
 }
 

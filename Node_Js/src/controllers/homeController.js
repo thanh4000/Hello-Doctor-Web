@@ -73,7 +73,7 @@ let putCRUD = async (req, res) => {
     let data = req.body;
     let allUsers = await CRUDservice.updateUserData(data);
     //sau khi upate thì hiển thị lại danh sách các user
-    
+    return allUsers;
     res.redirect('/get-crud');
 }
 
@@ -81,12 +81,16 @@ let deleteCRUD = async (req, res) => {
     //vd: delete-crud?id=1
     //dấu '?' là muốn tìm kiếm chỗ res.query
     let userId = req.query.id;
-    if(userId) {
-        await CRUDservice.deleteUserById(userId);
-        res.redirect('/get-crud');
-    }
-    else
-       return res.send("User not found");
+
+    if(!userId) {
+           return res.status(200).json({
+               errCode: 1,
+               errMessage: 'Missing required parameter!',
+           })
+       }
+       let message = await CRUDservice.deleteUser(userId);
+       console.log('message: ', message);
+       return res.status(200).json(message);
 }
 
 /*

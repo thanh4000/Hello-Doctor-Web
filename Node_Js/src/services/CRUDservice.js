@@ -94,7 +94,6 @@ let updateUserData = (data) => {
         user.firstName = data.firstName;
         user.lastName = data.lastName;
         user.address = data.address;
-
         await user.save();
 
         let allUsers = await db.User.findAll();
@@ -109,16 +108,27 @@ let updateUserData = (data) => {
   }); 
 }
 
-let deleteUserById = (userId) => {
+let deleteUser = (userId) => {
   return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
         where: {id: userId}
       })
-      if(user) {
-        await user.destroy();
+      if(!user) {
+          console.log("user isn't exist!");
+          resolve({
+              errCode: 2,
+              message: `User isn't exist!`
+          });
       }
-      resolve();
+      else {
+          console.log("deleted user!");
+          await user.destroy();
+          resolve({
+              errCode: 0,
+              message: `Ok! Delete user success!`
+          });
+      }
     } 
     catch(e) {
       reject(e);
@@ -131,5 +141,5 @@ module.exports = {
   getAllUser: getAllUser,
   getUserInfoById: getUserInfoById,
   updateUserData: updateUserData, 
-  deleteUserById: deleteUserById
+  deleteUser: deleteUser,
 };

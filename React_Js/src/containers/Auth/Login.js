@@ -93,7 +93,7 @@ class Login extends Component {
           <div className="login-content row">
             <div className="col-12 text-center text-login">Login</div>
             <div className="col-12 form-group login-input">
-              <label>UserName</label>
+              <label>Email</label>
               <input
                 type="text"
                 className="form-control"

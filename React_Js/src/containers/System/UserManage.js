@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import {getAllUsers, createNewUserService} from '../../services/userService';
+import {getAllUsers, createNewUserService, deleteUserService} from '../../services/userService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPencilAlt, faTrash, faPlus} from '@fortawesome/free-solid-svg-icons'
+import {emitter} from '../../utils/emitter';
 
 import ModalUser from './ModalUser';
 
@@ -57,11 +58,31 @@ class UserManage extends Component {
           this.setState({
             isOpenModalUser: false,
           })
+
+          //dùng emitter để fire 1 component ở con
+          emitter.emit('EVENT_CLEAR_MODAL_DATA');
         }
       } catch(e) {
 
       }
       console.log("check data from child and message: ", data);
+    }
+
+    handleDeleteUser = async (user) => {
+      console.log("delete user: ", user);
+      try {
+        let res = await deleteUserService(user.id);
+        console.log(res);
+        if(res && res.errCode > 0)
+        {
+          alert(res.errMessage);
+        } else {
+          await this.getAllUsersFromReact();
+        }
+      } catch(e) 
+      {
+        console.log('error: ', e);
+      }
     }
 
     /* Life cycle
@@ -121,7 +142,10 @@ class UserManage extends Component {
                             <FontAwesomeIcon icon={faPencilAlt}></FontAwesomeIcon>    
                           </button>
                           
-                          <button className='btn-delete'>
+                          <button 
+                            className='btn-delete'
+                            onClick={() => {this.handleDeleteUser(item)}}
+                          >
                             <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                           </button>
                         </td>

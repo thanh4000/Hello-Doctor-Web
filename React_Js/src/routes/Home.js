@@ -10,7 +10,7 @@ class Home extends Component {
     //nếu đã login rồi thì redirect đến route: /system/user-manage
     //nếu chưa thì redirect đến route: '/login'
     //vầy file login thì sẽ ứng với component nào?
-    let linkToRedirect = isLoggedIn ? "/system/user-manage" : "/login";
+    let linkToRedirect = isLoggedIn ? "/system/user-manage" : "/home";
 
     return <Redirect to={linkToRedirect} />;
   }

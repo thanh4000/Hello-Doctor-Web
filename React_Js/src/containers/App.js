@@ -6,7 +6,6 @@ import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
 import {
   userIsAuthenticated,
   userIsNotAuthenticated,
@@ -22,7 +21,10 @@ import Header from "./Header/Header";
 import System from "../routes/System";
 
 import { CustomToastCloseButton } from "../components/CustomToast";
-import ConfirmModal from "../components/ConfirmModal";
+
+import HomePage from "../containers/HomePage/HomePage"
+
+
 
 class App extends Component {
   handlePersistorState = () => {
@@ -53,7 +55,6 @@ class App extends Component {
                  */}
         <Router history={history}>
           <div className="main-container">
-            <ConfirmModal />
             {/* check có login hay ko
                         nếu loggin r thì render ra header*/}
             {this.props.isLoggedIn && <Header />}
@@ -75,6 +76,10 @@ class App extends Component {
                 <Route
                   path={path.SYSTEM}
                   component={userIsAuthenticated(System)}
+                />
+                 <Route
+                  path={path.HOMEPAGE}
+                  component={HomePage}
                 />
               </Switch>
             </span>

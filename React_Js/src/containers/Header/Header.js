@@ -6,6 +6,7 @@ import Navigator from "../../components/Navigator";
 import { adminMenu } from "./menuApp";
 import "./Header.scss";
 
+
 class Header extends Component {
   render() {
     const { processLogout } = this.props;

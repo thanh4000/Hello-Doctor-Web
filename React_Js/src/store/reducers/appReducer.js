@@ -31,6 +31,13 @@ const appReducer = (state = initialState, action) => {
                     ...action.contentOfConfirmModal
                 }
             }
+        case actionTypes.CHANGE_LANGUAGE:
+            //check thử bằng việc in ra obj action
+            console.log("hoidanit check redux", action);
+            return {
+                ...state,
+                language: action.language,
+            }
         default:
             return state;
     }

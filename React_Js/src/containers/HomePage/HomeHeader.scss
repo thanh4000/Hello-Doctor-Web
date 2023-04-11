@@ -1,7 +1,7 @@
 .home-header-container {
     height: 60px;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 40px;
 
     .home-header-content {
         width: 100%;
@@ -9,7 +9,7 @@
         display: flex;
         .left-content {
             width: 25%;
-            border: 1px solid orange;
+            // border: 1px solid orange;
             display: flex;
     
             justify-content: flex-start;
@@ -50,7 +50,7 @@
         }
     
         .center-content {
-            border: 1px solid orange;
+            // border: 1px solid orange;
             display: flex;
             width: 61%;
             justify-content: space-around;
@@ -66,10 +66,9 @@
 
         .right-content {
             width: 25%;
-            border: 1px solid green; 
-            
-            
-
+            // border: 1px solid green; 
+        
+        
             .support {
                 height: 100%;
                 width: 100%;
@@ -80,7 +79,36 @@
                 .icon-question {
                     // background: url('../../assets/question.svg') center center no-repeat;
                     height: 24%;
-                    padding: 4px;
+                    padding: 2px 4px 4px 4px;
+                }
+            }
+
+            .language-vi {
+                cursor: pointer;
+                margin: 0 8px;
+                font-weight: 600;
+                opacity: 0.2;
+                &.active {
+                    opacity: 1;
+                    span {
+                        color: #49bce2;
+                    }
+                }
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+            .language-en {
+                margin: 0 8px;
+                cursor: pointer;
+                font-weight: 600;
+                opacity: 0.2;
+                &.active {
+                    opacity: 1;
+                    span {
+                        color: #49bce2;
+                    }
                 }
             }
         }
@@ -90,7 +118,7 @@
 .home-header-banner {
     background: url('../../assets/cover-img.jpg');
     // padding: 15px 0;
-    height: 630px;
+    height: 550px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -98,7 +126,8 @@
     flex-direction: column;
 
     .content-up {
-        border: 1px solid red;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25),rgba(255, 255, 255, 0.1));;
+        // border: 1px solid red;
         height: 50%;
         padding-top: 15px;
 
@@ -144,8 +173,15 @@
     }
 
     .content-down {
-        border: 1px solid green;
+        // border: 1px solid green;
         height: 50%;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 1));
+
         .options {
             text-align: center;
             display: flex;
@@ -154,14 +190,14 @@
 
 
             .option-child {
-                width: 100px;
-                border: 1px solid red;
-
+                width: 150px;
+                // border: 1px solid red;
+                
 
                 .icon-child-wrapper {
                     background: white;
-                    width: 40px;
-                    height: 40px;
+                    width: 50px;
+                    height: 50px;
                     padding: 10px;
                     border-radius: 50%;
                     text-align: center;
@@ -174,7 +210,7 @@
                 }
 
                 .text-child {
-                    font-size: 17px;
+                    font-size: 18px;
                     font-weight: 500;
                     cursor: pointer;
 

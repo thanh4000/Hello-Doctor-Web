@@ -24,7 +24,7 @@ import { CustomToastCloseButton } from "../components/CustomToast";
 
 import HomePage from "../containers/HomePage/HomePage"
 
-
+import CustomScrollbars from "../components/CustomScrollbars";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -59,7 +59,9 @@ class App extends Component {
                         nếu loggin r thì render ra header*/}
             {this.props.isLoggedIn && <Header />}
 
-            <span className="content-container">
+            <div className="content-container">
+            {/* <></> */}
+            <CustomScrollbars style={{height: '100vh', width: '100%'}}>
               <Switch>
                 {/* có 3 route: HOME, LOGIN, SYSTEM */}
                 <Route path={path.HOME} exact component={Home} />
@@ -82,7 +84,8 @@ class App extends Component {
                   component={HomePage}
                 />
               </Switch>
-            </span>
+            </CustomScrollbars>
+            </div>
 
             <ToastContainer
               className="toast-container"
